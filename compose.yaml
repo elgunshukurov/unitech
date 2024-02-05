@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+  db:
+    hostname: mysql
+    image: mysql:5.7
+    container_name: unitech_user_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
+  redis:
+    image: redis:6.2-alpine
+    ports:
+      - '6379:6379'
+  redisinsight:
+    container_name: redisinsight
+    image: redislabs/redisinsight
+    ports:
+      - '8081-8001'
+volumes:
+  my-db:
